@@ -1,16 +1,25 @@
 #include "shell.h"
 
 void prompt(){
+    char *buf = "$ ";
     if (isatty(STDIN_FILENO))
+        _puts(buf);
 
 
 }
 
-void _putchar(char *str)
+int _putchar(char c)
+{
+    return (write(1,&c,1));
+}
+
+void _puts(char *str)
 {
     int i = 0;
-    for (; *(str+i)!='\0';i++)
+
+    while(str[i])
     {
-        
+        _putchar(str[i]);
+        i++;
     }
 }
