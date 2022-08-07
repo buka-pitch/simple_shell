@@ -7,8 +7,10 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 void prompt(void);
 void _puts(char *str);
 int _putchar(char c);
+int built_in_checker(char *cmd);
 
 #endif

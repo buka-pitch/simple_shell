@@ -7,7 +7,6 @@ int built_in_checker(char *cmd)
 	{
 
             exit(0);
-			return (1);
 	}
 	 if (strcmp(cmd, "help\n") == 0)
 	{
