@@ -11,6 +11,8 @@ int main(int argc, char **argv)
     {
         prompt();
         len = getline(&buffer,&size,stdin);
+        printf("%d\n",(int)len);
+        _puts(buffer);
     }
     return (SUCCESS);
 }
