@@ -10,6 +10,8 @@
 #include <sys/wait.h>
 #include <string.h>
 void prompt(void);
+void isEOF(void);
+void CurrentDir(char *buf);
 void _puts(char *str);
 int _putchar(char c);
 int built_in_checker(char *cmd);
