@@ -35,7 +35,7 @@ int main(int argc, char **argv,char **envp)
         
         if (pid == 0)               /* child process */
         {
-            char *path = "/bin/";
+            char *path = "";
             char *arg = args[0];
             char *newarg = malloc(strlen(path) + strlen(arg) + 1);
             strcpy(newarg, path);
@@ -43,7 +43,7 @@ int main(int argc, char **argv,char **envp)
             args[0] = newarg;
             if (builtin == 0)       /* if built in commands are not available */
             {
-                if (execve(args[0], args, envp) == -1)
+                if (execvp(args[0], args) == -1)
                 {
                     _puts("Error: Command not found\n");
                     exit(EXIT_FAILURE);

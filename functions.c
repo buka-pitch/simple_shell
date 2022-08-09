@@ -12,10 +12,18 @@ void prompt(){
         _puts("\tDeveloped by Biruk Yonas & Getie \n");
         _puts("\trepo : `https://github.com/buka-pitch/simple_shell`\n\n");
     }
+    char dir[256];
     char *buf = "$ ";
+    if (getcwd(dir, sizeof(dir)) == NULL)
+        perror("getcwd() error");
+
     init = 0;
     if (isatty(STDIN_FILENO))
+    {
         _puts(buf);
+	_puts(dir);
+	_puts(" >> ");
+    }
 }
 
 int _putchar(char c)
