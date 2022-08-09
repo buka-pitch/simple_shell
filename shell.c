@@ -1,5 +1,6 @@
 #include "shell.h"
 
+
 /* Simple shell program to excute bash commands ie. ls, cd, pwd */
 
 /**
@@ -35,14 +36,13 @@ int main(int argc, char **argv,char **envp)
                 break;
             }
         }
-	builtin = built_in_checker(args[0],args[1]);	/* check if built in commands are available */
+        char *path = "", *arg = args[0],  *newarg = malloc(strlen(path) + strlen(arg) + 1);
+	    builtin = built_in_checker(args[0],args[1]);	/* check if built in commands are available */
         pid_t pid = fork();
         
         if (pid == 0)               /* child process */
         {
-            char *path = "/bin/";
-            char *arg = args[0];
-            char *newarg = malloc(strlen(path) + strlen(arg) + 1);
+           
             strcpy(newarg, path);
             strcat(newarg, arg);
             args[0] = newarg;
@@ -54,21 +54,14 @@ int main(int argc, char **argv,char **envp)
                     exit(EXIT_FAILURE);
                 }
             }
-	    else if (builtin == 2)
-	    {
-	    	free(newarg);
-		return (0);
-	    }
-	    else 
-		{
-			free(newarg);
-		}
+	        
         }
         else                        /* parent */
         {
             wait(NULL);
         } 
     }
+    free(args);
     return (SUCCESS);
 }
 
