@@ -14,6 +14,6 @@ void isEOF(void);
 void CurrentDir(char *buf);
 void _puts(char *str);
 int _putchar(char c);
-int built_in_checker(char *cmd);
+int built_in_checker(char *cmd, char *cmd2);
 
 #endif

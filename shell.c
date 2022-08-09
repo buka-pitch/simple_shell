@@ -23,7 +23,7 @@ int main(int argc, char **argv,char **envp)
 		isEOF();
 
 	if (line == -1){
-		exit(0);
+		exit(1);
         }
 
         strcpy(command, cmd);
@@ -54,7 +54,15 @@ int main(int argc, char **argv,char **envp)
                     exit(EXIT_FAILURE);
                 }
             }
-	    free(newarg);
+	    else if (builtin == 2)
+	    {
+	    	free(newarg);
+		return (0);
+	    }
+	    else 
+		{
+			free(newarg);
+		}
         }
         else                        /* parent */
         {

@@ -17,20 +17,28 @@ void isEOF()
  * @cmd: pointer for the array of commands or inputed strings
  * */
 
-int built_in_checker(char *cmd)
+int built_in_checker(char *cmd, char *cmd2)
 {
-	if (strcmp(cmd, "exit\n") == 0)
-	{
 
-            exit(0);
+	if (strcmp(cmd, "exit") == 0)
+	{
+            return (2);
 	}
-	else if (strcmp(cmd, "clear\n") == 0)
+	else if (strcmp(cmd, "cd") == 0)
+	{
+		if(chdir(cmd2) != 0)
+		{
+			perror("error changing dir :");
+		}
+		return (1);
+	}
+	else if (strcmp(cmd, "clear") == 0)
 	{
 		system("clear");
 		return (1);
 	} 
 	
-	else if (strcmp(cmd, "help\n") == 0)
+	else if (strcmp(cmd, "help") == 0)
 	{
 		_puts("\n\n\t****************************************************************\n");
         _puts("\t***************** |   Simple bash shell    | *******************\n");
