@@ -14,14 +14,19 @@ int main(int argc, char **argv,char **envp)
     char *cmd,command[100], *args[20];
     size_t size = 0;
     int builtin = 0, line;
-    while (line != EOF)
+
+    while (1)
     {
         prompt();
         line = getline(&cmd, &size, stdin);
+	if (line == EOF)
+		isEOF();
+
 	if (line == -1){
 		exit(0);
         }
-        builtin = built_in_checker(cmd);    /* check if built in commands are available */
+
+     	builtin = built_in_checker(cmd);    /* check if built in commands are available */
         strcpy(command, cmd);
         args[0] = strtok(command, " \n"); 
         for (int i = 1; i < 20; i++)        /* split the command line into arguments */    
@@ -35,7 +40,7 @@ int main(int argc, char **argv,char **envp)
         
         if (pid == 0)               /* child process */
         {
-            char *path = "";
+            char *path = "/bin/";
             char *arg = args[0];
             char *newarg = malloc(strlen(path) + strlen(arg) + 1);
             strcpy(newarg, path);
