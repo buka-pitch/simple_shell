@@ -8,12 +8,13 @@ int built_in_checker(char *cmd)
 
             exit(0);
 	}
-	if (strcmp(cmd, "clear\n") == 0)
+	else if (strcmp(cmd, "clear\n") == 0)
 	{
 		system("clear");
 		return (1);
-	}
-	 if (strcmp(cmd, "help\n") == 0)
+	} 
+	
+	else if (strcmp(cmd, "help\n") == 0)
 	{
 		_puts("\n\n\t****************************************************************\n");
         _puts("\t***************** |   Simple bash shell    | *******************\n");
@@ -33,5 +34,8 @@ int built_in_checker(char *cmd)
 		_puts("\t\texit - exit the shell\n");
 		return (1);
 	}
-	return (0);
+	else
+	{
+		return (0);
+	}
 }
