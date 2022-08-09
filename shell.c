@@ -13,12 +13,13 @@ int main(int argc, char **argv,char **envp)
 {
     char *cmd,command[100], *args[20];
     size_t size = 0;
-    int builtin = 0;
-    while (1)
+    int builtin = 0, line;
+    while (line != EOF)
     {
         prompt();
-        if (getline(&cmd, &size, stdin) == -1){
-            exit(0);
+        line = getline(&cmd, &size, stdin);
+	if (line == -1){
+		exit(0);
         }
         builtin = built_in_checker(cmd);    /* check if built in commands are available */
         strcpy(command, cmd);
@@ -42,20 +43,19 @@ int main(int argc, char **argv,char **envp)
             args[0] = newarg;
             if (builtin == 0)       /* if built in commands are not available */
             {
-                if (execve(args[0], args, NULL) == -1)
+                if (execve(args[0], args, envp) == -1)
                 {
                     _puts("Error: Command not found\n");
                     exit(EXIT_FAILURE);
                 }
             }
+	    free(newarg);
         }
         else                        /* parent */
         {
             wait(NULL);
-        }
-        
+        } 
     }
-    free(args);
     return (SUCCESS);
 }
 
