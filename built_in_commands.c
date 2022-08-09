@@ -1,6 +1,22 @@
 #include "shell.h"
 
-/***/
+/**
+ * isEOF - if end of file detected it will print and exit the shell
+ */
+
+void isEOF()
+{
+	_puts("CTRL+D\n");
+	_puts("BYE ...\n");
+	exit(1);
+}
+
+
+/**
+ * built_in_checker - checks for s built in commands int the shell
+ * @cmd: pointer for the array of commands or inputed strings
+ * */
+
 int built_in_checker(char *cmd)
 {
 	if (strcmp(cmd, "exit\n") == 0)
