@@ -22,7 +22,7 @@ int built_in_checker(char *cmd, char *cmd2)
 
 	if (strcmp(cmd, "exit") == 0)
 	{
-            return (2);
+            return (-1);
 	}
 	else if (strcmp(cmd, "cd") == 0)
 	{

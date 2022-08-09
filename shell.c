@@ -38,6 +38,7 @@ int main(int argc, char **argv,char **envp)
         }
         char *path = "", *arg = args[0],  *newarg = malloc(strlen(path) + strlen(arg) + 1);
 	    builtin = built_in_checker(args[0],args[1]);	/* check if built in commands are available */
+
         pid_t pid = fork();
         
         if (pid == 0)               /* child process */
@@ -54,9 +55,8 @@ int main(int argc, char **argv,char **envp)
                     exit(EXIT_FAILURE);
                 }
             }
-	        
         }
-        else                        /* parent */
+        else     /* parent */
         {
             wait(NULL);
         } 
