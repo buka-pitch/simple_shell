@@ -26,7 +26,6 @@ int main(int argc, char **argv,char **envp)
 		exit(0);
         }
 
-     	builtin = built_in_checker(cmd);    /* check if built in commands are available */
         strcpy(command, cmd);
         args[0] = strtok(command, " \n"); 
         for (int i = 1; i < 20; i++)        /* split the command line into arguments */    
@@ -36,6 +35,7 @@ int main(int argc, char **argv,char **envp)
                 break;
             }
         }
+	builtin = built_in_checker(args[0],args[1]);	/* check if built in commands are available */
         pid_t pid = fork();
         
         if (pid == 0)               /* child process */
