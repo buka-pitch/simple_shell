@@ -1,6 +1,5 @@
 #include "shell.h"
 
-
 /* Simple shell program to excute bash commands ie. ls, cd, pwd */
 
 /**
@@ -9,27 +8,30 @@
  * @argv: command line arguments
  * Return: 0 on success, 1 on failure
  */
-
-int main(int argc, char **argv,char **envp)
-{
-    char *cmd,command[100], *args[20];
-    size_t size = 0;
-    int builtin = 0, line;
-
-    while (1)
-    {
-        prompt();
-        line = getline(&cmd, &size, stdin);
+char *_getline(char *cmd, size_t size){
+    int line;
+	line = getline(&cmd, &size, stdin);
 	if (line == EOF)
 		isEOF();
 
 	if (line == -1){
 		exit(1);
-        }
+	}
+    return (cmd);
+}
 
-        strcpy(command, cmd);
-        args[0] = strtok(command, " \n"); 
-        for (int i = 1; i < 20; i++)        /* split the command line into arguments */    
+int main(int argc, char **argv,char **envp)
+{
+	char *cmd, command[100], *args[20];
+	size_t size = 0;
+    int builtin = 0;
+    while (1)
+    {
+		prompt();
+		cmd = _getline(cmd, size);
+		strcpy(command, cmd);
+        args[0] = strtok(command, " \n");
+        for (int i = 1; i < 20; i++)        /* split the command line into arguments */
         {
             args[i] = strtok(NULL, " \n");
             if (args[i] == NULL){
@@ -38,12 +40,9 @@ int main(int argc, char **argv,char **envp)
         }
         char *path = "", *arg = args[0],  *newarg = malloc(strlen(path) + strlen(arg) + 1);
 	    builtin = built_in_checker(args[0],args[1]);	/* check if built in commands are available */
-
         pid_t pid = fork();
-        
         if (pid == 0)               /* child process */
         {
-           
             strcpy(newarg, path);
             strcat(newarg, arg);
             args[0] = newarg;
@@ -59,13 +58,9 @@ int main(int argc, char **argv,char **envp)
         else     /* parent */
         {
             wait(NULL);
-        } 
-    }
-    free(args);
-    return (SUCCESS);
+        }
+	}
+	free(args);
+	return (SUCCESS);
 }
-
-
-
-
 
