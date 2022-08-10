@@ -12,6 +12,7 @@
 void prompt(void);
 void isEOF(void);
 void CurrentDir(char *buf);
+void fork_excute(char *args[], int builtin);
 void _puts(char *str);
 int _putchar(char c);
 int built_in_checker(char *cmd, char *cmd2);

@@ -4,7 +4,7 @@
  * isEOF - if end of file detected it will print and exit the shell
  */
 
-void isEOF()
+void isEOF(void)
 {
 	_puts("CTRL+D\n");
 	_puts("BYE ...\n");
